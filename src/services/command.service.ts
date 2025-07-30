@@ -9,22 +9,20 @@ import { ChannelMessage } from 'mezon-sdk';
 
 @Injectable()
 export class CommandService implements CommandInterface {
-    public commandList: { [key: string]: CommandMessage };
+  public commandList: { [key: string]: CommandMessage };
 
-    constructor(
-        private readonly moduleRef: ModuleRef,
-    ) { }
+  constructor(private readonly moduleRef: ModuleRef) {}
 
-    execute(messageContent: string, message: ChannelMessage) {
-        const [commandName, args] = extractMessage(messageContent);
+  execute(messageContent: string, message: ChannelMessage) {
+    const [commandName, args] = extractMessage(messageContent);
 
-        const target = CommandStorage.getCommand(commandName as string);
-        if (target) {
-            const command = this.moduleRef.get(target);
+    const target = CommandStorage.getCommand(commandName as string);
+    if (target) {
+      const command = this.moduleRef.get(target);
 
-            if (command) {
-                return command.execute(args, message);
-            }
-        }
+      if (command) {
+        return command.execute(args, message);
+      }
     }
+  }
 }

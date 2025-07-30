@@ -12,26 +12,26 @@ import { ConfigService } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
-    imports: [
-        ScheduleModule.forRoot(),
-        // TypeOrmModule.forFeature([]),
-    ],
-    providers: [
-        BotGateway,
-        ClientConfigService,
-        ConfigService,
-        CommandService,
-        MessageQueue,
-        MessageCommand,
+  imports: [
+    ScheduleModule.forRoot(),
+    // TypeOrmModule.forFeature([]),
+  ],
+  providers: [
+    BotGateway,
+    ClientConfigService,
+    ConfigService,
+    CommandService,
+    MessageQueue,
+    MessageCommand,
 
-        // Listeners
-        EventListenerChannelMessage,
+    // Listeners
+    EventListenerChannelMessage,
 
-        // Commands
-        HelpCommand,
-        PingCommand,
-        AboutCommand,
-    ],
-    controllers: [],
+    // Commands
+    HelpCommand,
+    PingCommand,
+    AboutCommand,
+  ],
+  controllers: [],
 })
-export class BotModule { }
+export class BotModule {}
