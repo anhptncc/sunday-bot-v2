@@ -16,7 +16,7 @@ export const dataSourceOption: DataSourceOptions = {
   subscribers: [],
   schema: 'public',
   migrationsRun: true,
-  ssl: { rejectUnauthorized: true },
+  // ssl: { rejectUnauthorized: true },
 };
 
 export default new DataSource(dataSourceOption);

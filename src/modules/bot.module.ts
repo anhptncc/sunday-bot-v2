@@ -10,12 +10,13 @@ import { MessageQueue } from '@app/services/message-queue.service';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
+import { SalaryCountDownCommand } from '@app/command/countdown/demngaynhanluong.command';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Countdown } from '@app/entities/countdown.entity';
+import { CountdownService } from '@app/service/countdown.service';
 
 @Module({
-  imports: [
-    ScheduleModule.forRoot(),
-    // TypeOrmModule.forFeature([]),
-  ],
+  imports: [ScheduleModule.forRoot(), TypeOrmModule.forFeature([Countdown])],
   providers: [
     BotGateway,
     ClientConfigService,
@@ -23,6 +24,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     CommandService,
     MessageQueue,
     MessageCommand,
+    CountdownService,
 
     // Listeners
     EventListenerChannelMessage,
@@ -31,6 +33,8 @@ import { ScheduleModule } from '@nestjs/schedule';
     HelpCommand,
     PingCommand,
     AboutCommand,
+
+    SalaryCountDownCommand,
   ],
   controllers: [],
 })
