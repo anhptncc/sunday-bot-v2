@@ -1,20 +1,22 @@
-import { ApiMessageRef, ChannelMessage } from 'mezon-sdk';
-import { ReplyMezonMessage } from '@app/dtos/MezonReplyMessageDto';
-import { replyMessageGenerate } from '@app/utils/message';
+import { MezonClientService } from '@app/services/mezon-client.service';
+import { ChannelMessage, MezonClient } from 'mezon-sdk';
 
 export abstract class CommandMessage {
+  protected client: MezonClient;
+
+  constructor(protected clientService: MezonClientService) {
+    this.client = this.clientService.getClient();
+  }
+
+  protected async getChannelMessage(message: ChannelMessage) {
+    const clan = this.client.clans.get(message.clan_id!);
+    const channel = await clan?.channels.fetch(message.channel_id);
+    return await channel?.messages.fetch(message.message_id!);
+  }
+
   abstract execute(
     args: string[],
     message: ChannelMessage,
     commandName?: string,
   ): any;
-
-  replyMessageGenerate(
-    replayConent: { [x: string]: any },
-    message: ChannelMessage,
-    hasRef: boolean = true,
-    newRef?: ApiMessageRef[],
-  ): ReplyMezonMessage {
-    return replyMessageGenerate(replayConent, message, hasRef, newRef);
-  }
 }

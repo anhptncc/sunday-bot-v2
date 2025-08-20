@@ -17,7 +17,7 @@ export const APP_CONSTANTS = {
   },
 
   PREFIXES: {
-    DEFAULT_COMMAND: '!',
+    DEFAULT_COMMAND: '*',
   },
 } as const;
 
