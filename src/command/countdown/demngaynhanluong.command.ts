@@ -56,7 +56,7 @@ export class SalaryCountDownCommand extends CommandMessage {
     );
 
     const defaultPayDate = item?.targetDate || this.getPayDate();
-    const todayIsPayDate = dayjs().isSame(defaultPayDate);
+    const todayIsPayDate = dayjs().isSame(dayjs(defaultPayDate), 'day');
 
     const today = dayjs().startOf('day');
     const payday = dayjs(defaultPayDate).startOf('day');
