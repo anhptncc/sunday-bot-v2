@@ -17,7 +17,7 @@ export class Countdown extends AbstractEntity {
   })
   type: CountdownType;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: true })
   targetDate: Date | null;
 
   @Column({
