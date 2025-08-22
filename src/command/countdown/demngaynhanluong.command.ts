@@ -7,7 +7,7 @@ import { CountdownType } from '@app/entities/countdown.entity';
 import { MezonClientService } from '@app/services/mezon-client.service';
 import { getRandomColor } from '@app/utils/helpers';
 
-const slotItems = [
+const imageItems = [
   '1.png',
   '2.png',
   '3.png',
@@ -22,8 +22,8 @@ const slotItems = [
   '12.png',
 ];
 
-const hourglassIndex = slotItems.length - 2;
-const dollarIndex = slotItems.length - 1;
+const hourglassIndex = imageItems.length - 2;
+const dollarIndex = imageItems.length - 1;
 
 @Command('demngaynhanluong', {
   usage: '*demngaynhanluong',
@@ -36,7 +36,15 @@ export class SalaryCountDownCommand extends CommandMessage {
     super(clientService);
   }
 
-  getPayDate() {
+  getPayDate(targetDate?: Date) {
+    if (
+      targetDate &&
+      (dayjs(targetDate).isSame(dayjs(), 'day') ||
+        dayjs(targetDate).isAfter(dayjs()))
+    ) {
+      return targetDate;
+    }
+
     const today = dayjs();
     let next = today.date(5);
     if (today.date() > 5) {
@@ -55,14 +63,13 @@ export class SalaryCountDownCommand extends CommandMessage {
       CountdownType.PAYDAY,
     );
 
-    const defaultPayDate = item?.targetDate || this.getPayDate();
+    const defaultPayDate = this.getPayDate(item?.targetDate);
     const todayIsPayDate = dayjs().isSame(dayjs(defaultPayDate), 'day');
 
     const today = dayjs().startOf('day');
     const payday = dayjs(defaultPayDate).startOf('day');
     const daysLeft = Math.max(payday.diff(today, 'day'), 0);
 
-    // handle push days left
     let number: number[] = [hourglassIndex, 0, 0];
 
     if (todayIsPayDate) {
@@ -86,7 +93,7 @@ export class SalaryCountDownCommand extends CommandMessage {
 
     const results: string[][] = [];
     for (let i = 0; i < 3; i++) {
-      const result = [...slotItems, slotItems[number[i]]];
+      const result = [...imageItems, imageItems[number[i]]];
       results.push(result);
     }
 

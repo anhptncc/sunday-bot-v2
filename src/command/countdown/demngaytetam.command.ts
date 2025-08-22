@@ -6,7 +6,7 @@ import { CountdownService } from '@app/service/countdown.service';
 import { MezonClientService } from '@app/services/mezon-client.service';
 import { getRandomColor } from '@app/utils/helpers';
 
-const slotItems = [
+const imageItems = [
   '1.png',
   '2.png',
   '3.png',
@@ -20,7 +20,7 @@ const slotItems = [
   '11.png',
 ];
 
-const hourglassIndex = slotItems.length - 1;
+const happyIconIndex = imageItems.length - 1;
 
 export const lunarNewYearDates: Record<number, string> = {
   2024: '2024-02-10',
@@ -57,19 +57,29 @@ export class TetCountDownCommand extends CommandMessage {
   }
 
   getNextLunarNewYearCountdown() {
-    const today = dayjs();
+    const today = dayjs().format('YYYY-MM-DD');
     const years = Object.keys(lunarNewYearDates)
       .map(Number)
       .sort((a, b) => a - b);
 
     for (const year of years) {
       const date = dayjs(lunarNewYearDates[year]);
+      if (date.isSame(today, 'day')) {
+        return {
+          year,
+          date: date.format('YYYY-MM-DD'),
+          daysLeft: 0,
+          isToday: true,
+        };
+      }
+
       if (date.isAfter(today, 'day')) {
         const daysLeft = date.diff(today, 'day');
         return {
           year,
           date: date.format('YYYY-MM-DD'),
           daysLeft,
+          isToday: false,
         };
       }
     }
@@ -77,36 +87,41 @@ export class TetCountDownCommand extends CommandMessage {
   }
   async execute(args: string[], message: ChannelMessage) {
     const messageChannel = await this.getChannelMessage(message);
+    let title = 'Đếm ngược đến Tết Nguyên Đán';
 
     const nextNY = this.getNextLunarNewYearCountdown();
 
     const daysLeft = nextNY ? nextNY.daysLeft : 0;
 
-    // handle push days left
     let number: number[] = [0, 0, 0];
     const digits = daysLeft.toString().split('').map(Number);
 
-    if (daysLeft > 100) {
-      number = [digits[0], digits[1], digits[2]];
-    } else if (daysLeft > 9 && daysLeft < 100) {
-      number[0] = hourglassIndex;
-      number[1] = digits[0];
-      number[2] = digits[1];
+    if (nextNY.isToday) {
+      title = '🎉 Chúc mừng năm mới!';
+      number = [happyIconIndex, happyIconIndex, happyIconIndex];
     } else {
-      number[0] = hourglassIndex;
-      number[1] = hourglassIndex;
-      number[2] = daysLeft;
+      if (daysLeft > 100) {
+        number = [digits[0], digits[1], digits[2]];
+      } else if (daysLeft > 9 && daysLeft < 100) {
+        number[0] = 0;
+        number[1] = digits[0];
+        number[2] = digits[1];
+      } else {
+        number[0] = 0;
+        number[1] = 0;
+        number[2] = daysLeft;
+      }
     }
 
     const results: string[][] = [];
     for (let i = 0; i < 3; i++) {
-      const result = [...slotItems, slotItems[number[i]]];
+      const result = [...imageItems, imageItems[number[i]]];
       results.push(result);
     }
 
     const resultEmbed = {
       color: getRandomColor(),
-      title: 'Đếm ngược đến Tết Nguyên Đán',
+      title,
       fields: [
         {
           name: '',
@@ -116,7 +131,7 @@ export class TetCountDownCommand extends CommandMessage {
             type: EMessageComponentType.ANIMATION,
             component: {
               url_image:
-                'https://cdn.mezon.ai/1840653661416460288/1958044376819044352/1803263641638670300/1755860563872_Frame_7.png',
+                'https://cdn.mezon.ai/1840653661416460288/1958044376819044352/1803263641638670300/1755873430243_Frame_7__1_.png',
               url_position:
                 'https://cdn.mezon.ai/1840653661416460288/1958044376819044352/1803263641638670300/1755681221532_countdown.json',
               pool: results,
