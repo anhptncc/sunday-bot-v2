@@ -8,6 +8,7 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { SalaryCountDownCommand } from '@app/command/countdown/demngaynhanluong.command';
+import { TetCountDownCommand } from '@app/command/countdown/demngaytetam.command';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Countdown } from '@app/entities/countdown.entity';
 import { CountdownService } from '@app/service/countdown.service';
@@ -28,6 +29,7 @@ import { CountdownService } from '@app/service/countdown.service';
 
     // Commands
     SalaryCountDownCommand,
+    TetCountDownCommand,
   ],
   controllers: [],
 })
