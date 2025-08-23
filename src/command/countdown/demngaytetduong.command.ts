@@ -2,7 +2,6 @@ import * as dayjs from 'dayjs';
 import { ChannelMessage, EMessageComponentType } from 'mezon-sdk';
 import { Command } from '@app/decorators/command.decorator';
 import { CommandMessage } from '@app/command/common/command.abstract';
-import { CountdownService } from '@app/service/countdown.service';
 import { MezonClientService } from '@app/services/mezon-client.service';
 import { getRandomColor } from '@app/utils/helpers';
 
@@ -26,10 +25,7 @@ const happyIconIndex = imageItems.length - 1;
   usage: '*demngaytetduong',
 })
 export class NewYearCountDownCommand extends CommandMessage {
-  constructor(
-    private readonly countdownService: CountdownService,
-    clientService: MezonClientService,
-  ) {
+  constructor(clientService: MezonClientService) {
     super(clientService);
   }
 
