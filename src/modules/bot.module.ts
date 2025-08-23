@@ -14,6 +14,7 @@ import { CountdownService } from '@app/service/countdown.service';
 import { SalaryCountDownCommand } from '@app/command/countdown/demngaynhanluong.command';
 import { LunarNewYearCountDownCommand } from '@app/command/countdown/demngaytetam.command';
 import { NewYearCountDownCommand } from '@app/command/countdown/demngaytetduong.command';
+import { ChristmasCountDownCommand } from '@app/command/countdown/demngaygiangsinh.command';
 
 @Module({
   imports: [ScheduleModule.forRoot(), TypeOrmModule.forFeature([Countdown])],
@@ -33,6 +34,7 @@ import { NewYearCountDownCommand } from '@app/command/countdown/demngaytetduong.
     SalaryCountDownCommand,
     LunarNewYearCountDownCommand,
     NewYearCountDownCommand,
+    ChristmasCountDownCommand,
   ],
   controllers: [],
 })
