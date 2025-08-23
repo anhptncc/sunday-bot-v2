@@ -7,11 +7,13 @@ import { MessageQueue } from '@app/services/message-queue.service';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
-import { SalaryCountDownCommand } from '@app/command/countdown/demngaynhanluong.command';
-import { TetCountDownCommand } from '@app/command/countdown/demngaytetam.command';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Countdown } from '@app/entities/countdown.entity';
 import { CountdownService } from '@app/service/countdown.service';
+
+import { SalaryCountDownCommand } from '@app/command/countdown/demngaynhanluong.command';
+import { LunarNewYearCountDownCommand } from '@app/command/countdown/demngaytetam.command';
+import { NewYearCountDownCommand } from '@app/command/countdown/demngaytetduong.command';
 
 @Module({
   imports: [ScheduleModule.forRoot(), TypeOrmModule.forFeature([Countdown])],
@@ -29,7 +31,8 @@ import { CountdownService } from '@app/service/countdown.service';
 
     // Commands
     SalaryCountDownCommand,
-    TetCountDownCommand,
+    LunarNewYearCountDownCommand,
+    NewYearCountDownCommand,
   ],
   controllers: [],
 })

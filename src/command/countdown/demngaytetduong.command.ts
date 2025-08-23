@@ -21,71 +21,48 @@ const imageItems = [
 
 const happyIconIndex = imageItems.length - 1;
 
-export const lunarNewYearDates: Record<number, string> = {
-  2024: '2024-02-10',
-  2025: '2025-01-29',
-  2026: '2026-02-17',
-  2027: '2027-02-06',
-  2028: '2028-01-26',
-  2029: '2029-02-13',
-  2030: '2030-02-03',
-  2031: '2031-01-23',
-  2032: '2032-02-11',
-  2033: '2033-01-31',
-  2034: '2034-02-19',
-  2035: '2035-02-08',
-  2036: '2036-01-28',
-  2037: '2037-02-15',
-  2038: '2038-02-04',
-  2039: '2039-01-24',
-  2040: '2040-02-12',
-  2041: '2041-02-01',
-  2042: '2042-01-22',
-  2043: '2043-02-10',
-};
-
-@Command('demngaytetam', {
-  usage: '*demngaytetam',
+@Command('demngaytetduong', {
+  usage: '*demngaytetduong',
 })
-export class LunarNewYearCountDownCommand extends CommandMessage {
+export class NewYearCountDownCommand extends CommandMessage {
   constructor(clientService: MezonClientService) {
     super(clientService);
   }
 
-  getNextLunarNewYearCountdown() {
+  getNextNewYearCountdown() {
     const today = dayjs().format('YYYY-MM-DD');
-    const years = Object.keys(lunarNewYearDates)
-      .map(Number)
-      .sort((a, b) => a - b);
+    const currentYear = dayjs(today).year();
 
-    for (const year of years) {
-      const date = dayjs(lunarNewYearDates[year]);
-      if (date.isSame(today, 'day')) {
-        return {
-          year,
-          date: date.format('YYYY-MM-DD'),
-          daysLeft: 0,
-          isToday: true,
-        };
-      }
+    let newYear = dayjs(`${currentYear}-01-01`);
 
-      if (date.isAfter(today, 'day')) {
-        const daysLeft = date.diff(today, 'day');
-        return {
-          year,
-          date: date.format('YYYY-MM-DD'),
-          daysLeft,
-          isToday: false,
-        };
-      }
+    if (dayjs(today).isSame(newYear, 'day')) {
+      return {
+        year: currentYear,
+        date: newYear.format('YYYY-MM-DD'),
+        daysLeft: 0,
+        isToday: true,
+      };
     }
-    return null;
+
+    if (dayjs(today).isAfter(newYear, 'day')) {
+      newYear = dayjs(`${currentYear + 1}-01-01`);
+    }
+
+    const daysLeft = newYear.diff(today, 'day');
+
+    return {
+      year: newYear.year(),
+      date: newYear.format('YYYY-MM-DD'),
+      daysLeft,
+      isToday: false,
+    };
   }
+
   async execute(args: string[], message: ChannelMessage) {
     const messageChannel = await this.getChannelMessage(message);
-    let title = '⌛️ Đếm ngược đến Tết Nguyên Đán';
+    let title = '⌛️ Đếm ngược đến dương lịch';
 
-    const nextNY = this.getNextLunarNewYearCountdown();
+    const nextNY = this.getNextNewYearCountdown();
 
     const daysLeft = nextNY ? nextNY.daysLeft : 0;
 
