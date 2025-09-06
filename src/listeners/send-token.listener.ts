@@ -21,23 +21,22 @@ export class EventListenerSendToken {
 
   @OnEvent(Events.TokenSend)
   async handleCommand(tokenEvent: TokenSentEvent): Promise<void> {
-    if (tokenEvent.amount <= 0) return;
-
-    const botId = process.env.BOT_ID;
-    if (!botId) {
-      console.error('BOT_ID is not defined');
-      return;
-    }
-
-    if (tokenEvent.receiver_id === botId && tokenEvent.sender_id) {
-      this.userService.createOrUpdateUser({
-        userId: tokenEvent.sender_id,
-        balance: tokenEvent.amount,
-        username: tokenEvent.sender_name,
-      });
-    }
-
     try {
+      if (tokenEvent.amount <= 0) return;
+
+      const botId = process.env.BOT_ID;
+      if (!botId) {
+        console.error('BOT_ID is not defined');
+        return;
+      }
+
+      if (tokenEvent.receiver_id === botId && tokenEvent.sender_id) {
+        await this.userService.createOrUpdateUser({
+          userId: tokenEvent.sender_id,
+          balance: tokenEvent.amount,
+          username: tokenEvent.sender_name,
+        });
+      }
     } catch (error) {
       this.logger.error(ERROR_MESSAGES.CHANNEL_MESSAGE_PROCESSING, error);
     }
