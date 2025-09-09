@@ -19,6 +19,7 @@ import { NewYearCountDownCommand } from '@app/command/countdown/demngaytetduong.
 import { ChristmasCountDownCommand } from '@app/command/countdown/demngaygiangsinh.command';
 import { User } from '@app/entities/user.entity';
 import { AdminCommand } from '@app/command/admin/admin.command';
+import { HelpCommand } from '@app/command/help.command';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { AdminCommand } from '@app/command/admin/admin.command';
     NewYearCountDownCommand,
     ChristmasCountDownCommand,
     AdminCommand,
+    HelpCommand,
   ],
   controllers: [],
 })
