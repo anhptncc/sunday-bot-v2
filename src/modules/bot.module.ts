@@ -18,6 +18,7 @@ import { LunarNewYearCountDownCommand } from '@app/command/countdown/demngayteta
 import { NewYearCountDownCommand } from '@app/command/countdown/demngaytetduong.command';
 import { ChristmasCountDownCommand } from '@app/command/countdown/demngaygiangsinh.command';
 import { User } from '@app/entities/user.entity';
+import { AdminCommand } from '@app/command/admin/admin.command';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { User } from '@app/entities/user.entity';
     LunarNewYearCountDownCommand,
     NewYearCountDownCommand,
     ChristmasCountDownCommand,
+    AdminCommand,
   ],
   controllers: [],
 })

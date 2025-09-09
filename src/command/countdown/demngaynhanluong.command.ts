@@ -6,7 +6,21 @@ import { CountdownService } from '@app/service/countdown.service';
 import { CountdownType } from '@app/entities/countdown.entity';
 import { MezonClientService } from '@app/services/mezon-client.service';
 import { createMessageFromMsgReply, getRandomColor } from '@app/utils/helpers';
-import { imageItems } from '@app/common/constants';
+
+const imageItems = [
+  '1.png',
+  '2.png',
+  '3.png',
+  '4.png',
+  '5.png',
+  '6.png',
+  '7.png',
+  '8.png',
+  '9.png',
+  '10.png',
+  '11.png',
+  '12.png',
+];
 
 const hourglassIndex = imageItems.length - 2;
 const dollarIndex = imageItems.length - 1;
