@@ -1,3 +1,5 @@
+import { ChannelMessage, ChannelMessageAck } from 'mezon-sdk';
+
 export function getRandomColor(): string {
   const colors: string[] = [
     '#1ABC9C', // Aqua
@@ -21,4 +23,26 @@ export function getRandomColor(): string {
   ];
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex] || '#F1C40F';
+}
+
+export function createMessageFromMsgReply(
+  messBot: ChannelMessageAck,
+  message: ChannelMessage,
+) {
+  const msg: ChannelMessage = {
+    mode: messBot.mode,
+    message_id: messBot.message_id,
+    code: messBot.code,
+    create_time: messBot.create_time,
+    update_time: messBot.update_time,
+    id: messBot.message_id,
+    clan_id: message.clan_id,
+    channel_id: message.channel_id,
+    persistent: messBot.persistence,
+    channel_label: message.channel_label,
+    content: {},
+    sender_id: process.env.BOT_ID as string,
+  };
+
+  return msg;
 }

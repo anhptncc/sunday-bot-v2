@@ -5,22 +5,8 @@ import { CommandMessage } from '@app/command/common/command.abstract';
 import { CountdownService } from '@app/service/countdown.service';
 import { CountdownType } from '@app/entities/countdown.entity';
 import { MezonClientService } from '@app/services/mezon-client.service';
-import { getRandomColor } from '@app/utils/helpers';
-
-const imageItems = [
-  '1.png',
-  '2.png',
-  '3.png',
-  '4.png',
-  '5.png',
-  '6.png',
-  '7.png',
-  '8.png',
-  '9.png',
-  '10.png',
-  '11.png',
-  '12.png',
-];
+import { createMessageFromMsgReply, getRandomColor } from '@app/utils/helpers';
+import { imageItems } from '@app/common/constants';
 
 const hourglassIndex = imageItems.length - 2;
 const dollarIndex = imageItems.length - 1;
@@ -115,11 +101,22 @@ export class SalaryCountDownCommand extends CommandMessage {
               pool: results,
               repeat: 3,
               duration: 0.35,
+              isResult: 0,
             },
           },
         },
       ],
     };
-    return messageChannel.reply({ embed: [resultEmbed] });
+
+    const messBot = await messageChannel.reply({ embed: [resultEmbed] });
+
+    const msg = createMessageFromMsgReply(messBot, message);
+
+    this.getChannelMessage(msg).then((messageBot) => {
+      resultEmbed.fields[0].inputs.component.isResult = 1;
+      setTimeout(() => {
+        messageBot?.update({ embed: [resultEmbed] });
+      }, 1300);
+    });
   }
 }
