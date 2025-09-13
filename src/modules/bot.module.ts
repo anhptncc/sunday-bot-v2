@@ -17,6 +17,7 @@ import { SalaryCountDownCommand } from '@app/command/countdown/demngaynhanluong.
 import { LunarNewYearCountDownCommand } from '@app/command/countdown/demngaytetam.command';
 import { NewYearCountDownCommand } from '@app/command/countdown/demngaytetduong.command';
 import { ChristmasCountDownCommand } from '@app/command/countdown/demngaygiangsinh.command';
+import { DecisionsCommand } from '@app/command/countdown/decisions.command';
 import { User } from '@app/entities/user.entity';
 import { AdminCommand } from '@app/command/admin/admin.command';
 import { HelpCommand } from '@app/command/help.command';
@@ -45,6 +46,7 @@ import { HelpCommand } from '@app/command/help.command';
     LunarNewYearCountDownCommand,
     NewYearCountDownCommand,
     ChristmasCountDownCommand,
+    DecisionsCommand,
     AdminCommand,
     HelpCommand,
   ],
