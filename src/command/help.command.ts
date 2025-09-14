@@ -3,7 +3,7 @@ import { Command } from '@app/decorators/command.decorator';
 import { CommandMessage } from '@app/command/common/command.abstract';
 import { MezonClientService } from '@app/services/mezon-client.service';
 
-@Command('help', {
+@Command('sdhelp', {
   description: 'Shows available commands and their usage',
 })
 export class HelpCommand extends CommandMessage {
@@ -12,16 +12,15 @@ export class HelpCommand extends CommandMessage {
   }
 
   async execute(args: string[], message: ChannelMessage) {
-
     const messageChannel = await this.getChannelMessage(message);
 
     const messageContent =
-      `**Available Commands:**\n` +
+      `#Available Commands:\n` +
       `*demngaynhanluong\n` +
       `*demngaytetam\n` +
       `*demngaytetduong\n` +
-      `*decision\n` +
-      `*demngaygiangsinh`;
+      `*demngaygiangsinh\n` +
+      `*decision`;
 
     return messageChannel.reply({
       t: messageContent,
