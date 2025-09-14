@@ -47,7 +47,7 @@ export class NewYearCountDownCommand extends CommandMessage {
 
   async execute(args: string[], message: ChannelMessage) {
     const messageChannel = await this.getChannelMessage(message);
-    let title = '⌛️ Đếm ngược đến dương lịch';
+    let title = '⌛️ Đếm ngược đến Tết dương lịch';
 
     const nextNY = this.getNextNewYearCountdown();
 
