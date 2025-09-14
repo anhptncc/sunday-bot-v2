@@ -21,6 +21,7 @@ import { DecisionsCommand } from '@app/command/countdown/decisions.command';
 import { User } from '@app/entities/user.entity';
 import { AdminCommand } from '@app/command/admin/admin.command';
 import { HelpCommand } from '@app/command/help.command';
+import { MidAutumnFestivalCountDownCommand } from '@app/command/countdown/demngaytrungthu.command';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { HelpCommand } from '@app/command/help.command';
     DecisionsCommand,
     AdminCommand,
     HelpCommand,
+    MidAutumnFestivalCountDownCommand,
   ],
   controllers: [],
 })
