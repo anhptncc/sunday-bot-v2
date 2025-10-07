@@ -51,14 +51,30 @@ export class UserService {
   }
 
   async updateUser(user: UpdateUserDto) {
-    const { userId, dharmaName, ordinationDate } = user;
-    const updateData: Partial<UpdateUserDto> = {};
-    if (dharmaName !== undefined) {
-      updateData.dharmaName = dharmaName;
-    }
-    if (ordinationDate !== undefined) {
-      updateData.ordinationDate = ordinationDate;
-    }
+    const { userId, ...rest } = user;
+    const updateData = Object.fromEntries(
+      Object.entries(rest).filter(([, value]) => value !== undefined),
+    );
     return this.userRepo.update({ id: userId }, updateData);
+  }
+
+  async updateBotBalance(amount: number) {
+    const sunday = await this.userRepo.findOneBy({ role: UserRole.BOT });
+    if (sunday) {
+      return this.userRepo.increment({ role: UserRole.BOT }, 'balance', amount);
+    }
+  }
+
+  async getBotBalance(): Promise<number> {
+    const bot = await this.userRepo.findOneBy({ role: UserRole.BOT });
+    return bot?.balance || 0;
+  }
+
+  async getUserBalance(userId: string): Promise<number> {
+    const user = await this.userRepo.findOne({
+      where: { id: userId },
+      select: ['balance'],
+    });
+    return user?.balance || 0;
   }
 }

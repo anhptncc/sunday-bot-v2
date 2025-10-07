@@ -13,4 +13,5 @@ export interface UpdateUserDto {
   userId: string;
   dharmaName?: string;
   ordinationDate?: Date;
+  balance?: number;
 }

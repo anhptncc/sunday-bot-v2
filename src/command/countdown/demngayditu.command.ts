@@ -125,16 +125,24 @@ export class DemNgayDiTuCommand extends CommandMessage {
       return DemNgayDiTuCommand.MESSAGES.NOT_INITIALIZED;
     }
 
+    const userBalance = Number(user.balance) || 0;
+    if (userBalance < 5000) {
+      return 'Thí chủ cần công đức 5000 token để đổi pháp danh.';
+    }
+
     const newDharmaName = this.getDharmaName(args);
     const validationError = this.validateDharmaName(newDharmaName);
     if (validationError) {
       return validationError;
     }
 
-    await this.userService.updateUser({
+    this.userService.updateUser({
       userId,
       dharmaName: newDharmaName,
+      balance: userBalance - 5000,
     });
+
+    this.userService.updateBotBalance(5000);
 
     return DemNgayDiTuCommand.MESSAGES.DHARMA_NAME_UPDATED(newDharmaName);
   }
