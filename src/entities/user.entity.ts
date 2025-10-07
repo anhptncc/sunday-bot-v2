@@ -36,4 +36,11 @@ export class User {
 
   @DeleteDateColumn({ nullable: true })
   deletedAt?: Date;
+
+  // demngayditu
+  @Column({ type: 'text', nullable: true })
+  dharmaName: string;
+
+  @Column({ type: 'date', nullable: true })
+  ordinationDate: Date;
 }

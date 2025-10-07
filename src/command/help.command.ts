@@ -20,6 +20,9 @@ export class HelpCommand extends CommandMessage {
       `*demngaytetam\n` +
       `*demngaytetduong\n` +
       `*demngaygiangsinh\n` +
+      `*demngayditu\n` +
+      `*demngayditu start [pháp danh]\n` +
+      `*demngayditu rename [pháp danh]\n` +
       `*decision`;
 
     return messageChannel.reply({
