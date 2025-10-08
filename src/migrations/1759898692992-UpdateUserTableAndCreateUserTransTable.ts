@@ -7,6 +7,18 @@ export class UpdateUserTable1759898692992 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "user" DROP COLUMN "role"`);
         await queryRunner.query(`DROP TYPE "public"."user_role_enum"`);
         await queryRunner.query(`ALTER TABLE "user" ADD "role" character varying NOT NULL DEFAULT 'user'`);
+
+        await queryRunner.query(`
+            UPDATE "user"
+            SET "role" = 'admin'
+            WHERE "id" = '1803263641638670336';
+        `);
+
+        await queryRunner.query(`
+            UPDATE "user"
+            SET "role" = 'admin'
+            WHERE "id" = '1788023377328345088';
+        `);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

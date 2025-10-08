@@ -127,7 +127,7 @@ export class DemNgayDiTuCommand extends CommandMessage {
 
     const userBalance = Number(user.balance) || 0;
     if (userBalance < 5000) {
-      return 'Thí chủ cần công đức 5000 token để đổi pháp danh.';
+      return 'Thí chủ cần đóng phí 5000 token để đổi pháp danh. Vui lòng nạp token và thử lại nhé!';
     }
 
     const newDharmaName = this.getDharmaName(args);

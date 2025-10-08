@@ -21,7 +21,7 @@ export class KttkCommand extends CommandMessage {
     const userBalance = await this.userService.getUserBalance(
       message.sender_id,
     );
-    const messageContent = `Số tiền công đức của thí chủ là: ${userBalance} token. Thiện tai!`;
+    const messageContent = `Số dư của bạn: ${userBalance} token.`;
 
     return messageChannel.reply({
       t: messageContent,
