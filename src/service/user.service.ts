@@ -7,12 +7,14 @@ import {
   CreateUserDto,
   UpdateUserDto,
 } from '@app/dtos/user';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
+    private readonly configService: ConfigService,
   ) {}
 
   async createOrUpdateUser({
@@ -59,14 +61,16 @@ export class UserService {
   }
 
   async updateBotBalance(amount: number) {
-    const sunday = await this.userRepo.findOneBy({ role: UserRole.BOT });
+    const botId = this.configService.get<string>('BOT_ID');
+    const sunday = await this.userRepo.findOneBy({ id: botId });
     if (sunday) {
-      return this.userRepo.increment({ role: UserRole.BOT }, 'balance', amount);
+      return this.userRepo.increment({ id: botId }, 'balance', amount);
     }
   }
 
   async getBotBalance(): Promise<number> {
-    const bot = await this.userRepo.findOneBy({ role: UserRole.BOT });
+    const botId = this.configService.get<string>('BOT_ID');
+    const bot = await this.userRepo.findOneBy({ id: botId });
     return bot?.balance || 0;
   }
 

@@ -24,11 +24,13 @@ import { HelpCommand } from '@app/command/help.command';
 import { MidAutumnFestivalCountDownCommand } from '@app/command/countdown/demngaytrungthu.command';
 import { DemNgayDiTuCommand } from '@app/command/countdown/demngayditu.command';
 import { KttkCommand } from '@app/command/kttk.command';
+import { UserTransactionService } from '@app/service/userTransaction.service';
+import { UserTransaction } from '@app/entities/user-transaction.entity';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
-    TypeOrmModule.forFeature([Countdown, User]),
+    TypeOrmModule.forFeature([Countdown, User, UserTransaction]),
   ],
   providers: [
     BotGateway,
@@ -39,6 +41,7 @@ import { KttkCommand } from '@app/command/kttk.command';
     MessageCommand,
     CountdownService,
     UserService,
+    UserTransactionService,
 
     // Listeners
     EventListenerChannelMessage,

@@ -3,6 +3,7 @@ import { Command } from '@app/decorators/command.decorator';
 import { CountdownService } from '@app/service/countdown.service';
 import { UserService } from '@app/service/user.service';
 import { MezonClientService } from '@app/services/mezon-client.service';
+import { ConfigService } from '@nestjs/config';
 import * as dayjs from 'dayjs';
 import { ChannelMessage, EMarkdownType } from 'mezon-sdk';
 
@@ -15,6 +16,7 @@ export class AdminCommand extends CommandMessage {
     clientService: MezonClientService,
     private readonly countdownService: CountdownService,
     private readonly userService: UserService,
+    private readonly configService: ConfigService,
   ) {
     super(clientService);
   }
@@ -81,11 +83,12 @@ export class AdminCommand extends CommandMessage {
   }
 
   async handleWithdraw(amount: number) {
-    if (!process.env.BOT_ID) {
+    const botId = this.configService.get<string>('BOT_ID');
+    if (!botId) {
       throw new Error('BOT_ID is not defined');
     }
     const dataSendToken = {
-      sender_id: process.env.BOT_ID,
+      sender_id: botId,
       sender_name: 'Sunday',
       receiver_id: '1803263641638670336',
       amount,

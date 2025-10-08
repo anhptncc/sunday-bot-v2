@@ -10,7 +10,9 @@ import {
 export enum UserRole {
   USER = 'user',
   ADMIN = 'admin',
-  BOT = 'bot',
+
+  // custom
+  HOM_CONG_DUC = 'homcongduc',
 }
 
 @Entity({
@@ -23,7 +25,7 @@ export class User {
   @Column({ type: 'text', nullable: true })
   username: string;
 
-  @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
+  @Column({ type: 'varchar', default: UserRole.USER })
   role: UserRole;
 
   @Column({ type: 'numeric', default: 0 })
