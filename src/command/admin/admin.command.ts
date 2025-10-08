@@ -83,7 +83,7 @@ export class AdminCommand extends CommandMessage {
   }
 
   async handleWithdraw(amount: number) {
-    const botId = this.configService.get<string>('BOT_ID');
+    const botId = process.env.BOT_ID;
     if (!botId) {
       throw new Error('BOT_ID is not defined');
     }

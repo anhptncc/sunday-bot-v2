@@ -61,7 +61,7 @@ export class UserService {
   }
 
   async updateBotBalance(amount: number) {
-    const botId = this.configService.get<string>('BOT_ID');
+    const botId = process.env.BOT_ID;
     const sunday = await this.userRepo.findOneBy({ id: botId });
     if (sunday) {
       return this.userRepo.increment({ id: botId }, 'balance', amount);
@@ -69,7 +69,7 @@ export class UserService {
   }
 
   async getBotBalance(): Promise<number> {
-    const botId = this.configService.get<string>('BOT_ID');
+    const botId = process.env.BOT_ID;
     const bot = await this.userRepo.findOneBy({ id: botId });
     return bot?.balance || 0;
   }
