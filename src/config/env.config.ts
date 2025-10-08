@@ -1,7 +1,9 @@
 import * as dotenv from 'dotenv';
 
-const ENV = process.env.ENV;
-export const envFilePath = `.env.${ENV ?? 'local'}`;
+// const ENV = process.env.ENV;
+// export const envFilePath = `.env.${ENV ?? 'local'}`;
+
+export const envFilePath = `.env`;
 
 dotenv.config({ path: envFilePath });
 
