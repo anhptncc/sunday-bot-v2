@@ -5,6 +5,7 @@ import { OnEvent } from '@nestjs/event-emitter';
 import { Events, MezonClient, TokenSentEvent } from 'mezon-sdk';
 import { ERROR_MESSAGES } from '@app/common/constants';
 import { UserService } from '@app/service/user.service';
+import { UserTransactionService } from '@app/service/userTransaction.service';
 
 @Injectable()
 export class EventListenerSendToken {
@@ -15,6 +16,7 @@ export class EventListenerSendToken {
     private readonly clientService: MezonClientService,
     private readonly clientConfigService: ClientConfigService,
     private readonly userService: UserService,
+    private readonly userTransaction: UserTransactionService,
   ) {
     this.client = clientService.getClient();
   }
@@ -36,6 +38,11 @@ export class EventListenerSendToken {
           balance: tokenEvent.amount,
           username: tokenEvent.sender_name,
         });
+        await this.userTransaction.createTransaction(
+          tokenEvent.sender_id,
+          tokenEvent.receiver_id,
+          tokenEvent.amount,
+        );
       }
     } catch (error) {
       this.logger.error(ERROR_MESSAGES.CHANNEL_MESSAGE_PROCESSING, error);

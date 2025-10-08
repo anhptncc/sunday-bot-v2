@@ -22,6 +22,8 @@ import { User } from '@app/entities/user.entity';
 import { AdminCommand } from '@app/command/admin/admin.command';
 import { HelpCommand } from '@app/command/help.command';
 import { MidAutumnFestivalCountDownCommand } from '@app/command/countdown/demngaytrungthu.command';
+import { DemNgayDiTuCommand } from '@app/command/countdown/demngayditu.command';
+import { KttkCommand } from '@app/command/kttk.command';
 
 @Module({
   imports: [
@@ -51,6 +53,8 @@ import { MidAutumnFestivalCountDownCommand } from '@app/command/countdown/demnga
     AdminCommand,
     HelpCommand,
     MidAutumnFestivalCountDownCommand,
+    DemNgayDiTuCommand,
+    KttkCommand,
   ],
   controllers: [],
 })

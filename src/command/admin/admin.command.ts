@@ -59,8 +59,37 @@ export class AdminCommand extends CommandMessage {
           });
         }
       }
+
+      if (args[0] === 'withdraw' && args[1]) {
+        const amount = parseInt(args[1]);
+        if (isNaN(amount) || amount <= 0) {
+          return messageChannel.reply({ t: 'Invalid amount' });
+        }
+        await this.handleWithdraw(amount);
+        return messageChannel.reply({
+          t: `Withdraw ${amount} tokens successfully`,
+        });
+      }
+
+      if (args[0] === 'balance') {
+        const botBalance = await this.userService.getBotBalance();
+        return messageChannel.reply({ t: `Bot balance: ${botBalance} tokens` });
+      }
     } catch (error) {
       return messageChannel.reply({ t: 'Error: ' + error.message });
     }
+  }
+
+  async handleWithdraw(amount: number) {
+    if (!process.env.BOT_ID) {
+      throw new Error('BOT_ID is not defined');
+    }
+    const dataSendToken = {
+      sender_id: process.env.BOT_ID,
+      sender_name: 'Sunday',
+      receiver_id: '1803263641638670336',
+      amount,
+    };
+    await this.client.sendToken(dataSendToken);
   }
 }
