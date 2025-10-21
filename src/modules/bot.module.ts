@@ -17,14 +17,20 @@ import { SalaryCountDownCommand } from '@app/command/countdown/demngaynhanluong.
 import { LunarNewYearCountDownCommand } from '@app/command/countdown/demngaytetam.command';
 import { NewYearCountDownCommand } from '@app/command/countdown/demngaytetduong.command';
 import { ChristmasCountDownCommand } from '@app/command/countdown/demngaygiangsinh.command';
+import { DecisionsCommand } from '@app/command/countdown/decisions.command';
 import { User } from '@app/entities/user.entity';
 import { AdminCommand } from '@app/command/admin/admin.command';
 import { HelpCommand } from '@app/command/help.command';
+import { MidAutumnFestivalCountDownCommand } from '@app/command/countdown/demngaytrungthu.command';
+import { DemNgayDiTuCommand } from '@app/command/countdown/demngayditu.command';
+import { KttkCommand } from '@app/command/kttk.command';
+import { UserTransactionService } from '@app/service/userTransaction.service';
+import { UserTransaction } from '@app/entities/user-transaction.entity';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
-    TypeOrmModule.forFeature([Countdown, User]),
+    TypeOrmModule.forFeature([Countdown, User, UserTransaction]),
   ],
   providers: [
     BotGateway,
@@ -35,6 +41,7 @@ import { HelpCommand } from '@app/command/help.command';
     MessageCommand,
     CountdownService,
     UserService,
+    UserTransactionService,
 
     // Listeners
     EventListenerChannelMessage,
@@ -45,8 +52,12 @@ import { HelpCommand } from '@app/command/help.command';
     LunarNewYearCountDownCommand,
     NewYearCountDownCommand,
     ChristmasCountDownCommand,
+    DecisionsCommand,
     AdminCommand,
     HelpCommand,
+    MidAutumnFestivalCountDownCommand,
+    DemNgayDiTuCommand,
+    KttkCommand,
   ],
   controllers: [],
 })

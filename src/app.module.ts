@@ -20,6 +20,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         POSTGRES_PASSWORD: Joi.string().required(),
         POSTGRES_DB: Joi.string().required(),
         MEZON_TOKEN: Joi.string().required(),
+        BOT_ID: Joi.string().required(),
       }),
       isGlobal: true,
       envFilePath: envFilePath,

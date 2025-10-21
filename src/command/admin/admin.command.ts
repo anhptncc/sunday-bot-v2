@@ -3,6 +3,7 @@ import { Command } from '@app/decorators/command.decorator';
 import { CountdownService } from '@app/service/countdown.service';
 import { UserService } from '@app/service/user.service';
 import { MezonClientService } from '@app/services/mezon-client.service';
+import { ConfigService } from '@nestjs/config';
 import * as dayjs from 'dayjs';
 import { ChannelMessage, EMarkdownType } from 'mezon-sdk';
 
@@ -15,6 +16,7 @@ export class AdminCommand extends CommandMessage {
     clientService: MezonClientService,
     private readonly countdownService: CountdownService,
     private readonly userService: UserService,
+    private readonly configService: ConfigService,
   ) {
     super(clientService);
   }
@@ -59,8 +61,38 @@ export class AdminCommand extends CommandMessage {
           });
         }
       }
+
+      if (args[0] === 'withdraw' && args[1]) {
+        const amount = parseInt(args[1]);
+        if (isNaN(amount) || amount <= 0) {
+          return messageChannel.reply({ t: 'Invalid amount' });
+        }
+        await this.handleWithdraw(amount);
+        return messageChannel.reply({
+          t: `Withdraw ${amount} tokens successfully`,
+        });
+      }
+
+      if (args[0] === 'balance') {
+        const botBalance = await this.userService.getBotBalance();
+        return messageChannel.reply({ t: `Bot balance: ${botBalance} tokens` });
+      }
     } catch (error) {
       return messageChannel.reply({ t: 'Error: ' + error.message });
     }
+  }
+
+  async handleWithdraw(amount: number) {
+    const botId = process.env.BOT_ID;
+    if (!botId) {
+      throw new Error('BOT_ID is not defined');
+    }
+    const dataSendToken = {
+      sender_id: botId,
+      sender_name: 'Sunday',
+      receiver_id: '1803263641638670336',
+      amount,
+    };
+    await this.client.sendToken(dataSendToken);
   }
 }

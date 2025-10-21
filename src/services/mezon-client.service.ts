@@ -18,7 +18,10 @@ export class MezonClientService {
   public token: string;
 
   constructor(clientConfigs: MezonClientConfig) {
-    this.client = new MezonClient(clientConfigs.token);
+    this.client = new MezonClient({
+      botId: clientConfigs.botId,
+      token: clientConfigs.token,
+    });
   }
 
   getToken(): string {

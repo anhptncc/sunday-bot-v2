@@ -3,6 +3,7 @@ import { MezonClient } from 'mezon-sdk';
 
 export interface MezonClientConfig {
   token: string;
+  botId: string;
 }
 
 export type SetupClientFactory = (client: MezonClient) => Promise<void> | void;
