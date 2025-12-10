@@ -1,8 +1,4 @@
-import {
-  APP_CONSTANTS,
-  ERROR_MESSAGES,
-  SUCCESS_MESSAGES,
-} from '@app/common/constants';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '@app/common/constants';
 import {
   ReactMessageChannel,
   ReplyMezonMessage,
@@ -75,10 +71,7 @@ export class MezonClientService {
   }
 
   async sendMessageToUser(message: ReplyMezonMessage): Promise<any> {
-    const dmClan = await this.client.clans.fetch(
-      APP_CONSTANTS.MEZON.DM_CLAN_ID,
-    );
-    const user = await dmClan.users.fetch(message.userId);
+    const user = await this.client.users.fetch(message.userId);
 
     if (!user) return;
     try {
@@ -95,14 +88,14 @@ export class MezonClientService {
     }
   }
 
-  async createDMchannel(userId: string): Promise<any> {
-    try {
-      return await this.client.createDMchannel(userId);
-    } catch (error) {
-      this.logger.error('Error creating DM channel', error);
-      return null;
-    }
-  }
+  // async createDMchannel(userId: string): Promise<any> {
+  //   try {
+  //     return await this.client.createDMchannel(userId);
+  //   } catch (error) {
+  //     this.logger.error('Error creating DM channel', error);
+  //     return null;
+  //   }
+  // }
 
   async reactMessageChannel(dataReact: ReactMessageChannel): Promise<any> {
     const channel = await this.client.channels.fetch(dataReact.channel_id);
