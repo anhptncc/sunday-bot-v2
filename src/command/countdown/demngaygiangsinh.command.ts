@@ -91,7 +91,7 @@ export class ChristmasCountDownCommand extends CommandMessage {
             type: EMessageComponentType.ANIMATION,
             component: {
               url_image:
-                'https://cdn.mezon.ai/1840653661416460288/1958044376819044352/1803263641638670300/1755922887666_christmas.png',
+                'https://cdn.mezon.ai/1803263641638670336/2003390231352446976.png',
               url_position:
                 'https://cdn.mezon.ai/1840653661416460288/1958044376819044352/1803263641638670300/1755681221532_countdown.json',
               pool: results,
