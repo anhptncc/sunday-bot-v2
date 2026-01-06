@@ -114,7 +114,7 @@ export class LunarNewYearCountDownCommand extends CommandMessage {
             type: EMessageComponentType.ANIMATION,
             component: {
               url_image:
-                'https://cdn.mezon.ai/1840653661416460288/1958044376819044352/1803263641638670300/1755873430243_Frame_7__1_.png',
+                'https://cdn.mezon.ai/1803263641638670336/2008476669140013056.png',
               url_position:
                 'https://cdn.mezon.ai/1840653661416460288/1958044376819044352/1803263641638670300/1755681221532_countdown.json',
               pool: results,
