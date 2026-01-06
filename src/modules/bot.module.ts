@@ -26,6 +26,7 @@ import { DemNgayDiTuCommand } from '@app/command/countdown/demngayditu.command';
 import { KttkCommand } from '@app/command/kttk.command';
 import { UserTransactionService } from '@app/service/userTransaction.service';
 import { UserTransaction } from '@app/entities/user-transaction.entity';
+import { YepCountDownCommand } from '@app/command/countdown/demngayyep.command';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { UserTransaction } from '@app/entities/user-transaction.entity';
     MidAutumnFestivalCountDownCommand,
     DemNgayDiTuCommand,
     KttkCommand,
+    YepCountDownCommand,
   ],
   controllers: [],
 })
