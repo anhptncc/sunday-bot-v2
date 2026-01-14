@@ -27,6 +27,9 @@ import { KttkCommand } from '@app/command/kttk.command';
 import { UserTransactionService } from '@app/service/userTransaction.service';
 import { UserTransaction } from '@app/entities/user-transaction.entity';
 import { YepCountDownCommand } from '@app/command/countdown/demngayyep.command';
+import { RollCommand } from '@app/command/roll.command';
+import { BookCommand } from '@app/command/book.command';
+import { CookCommand } from '@app/command/cook.command';
 
 @Module({
   imports: [
@@ -49,17 +52,20 @@ import { YepCountDownCommand } from '@app/command/countdown/demngayyep.command';
     EventListenerSendToken,
 
     // Commands
-    SalaryCountDownCommand,
-    LunarNewYearCountDownCommand,
-    NewYearCountDownCommand,
-    ChristmasCountDownCommand,
-    DecisionsCommand,
-    AdminCommand,
-    HelpCommand,
-    MidAutumnFestivalCountDownCommand,
-    DemNgayDiTuCommand,
-    KttkCommand,
-    YepCountDownCommand,
+    // SalaryCountDownCommand,
+    // LunarNewYearCountDownCommand,
+    // NewYearCountDownCommand,
+    // ChristmasCountDownCommand,
+    // DecisionsCommand,
+    // AdminCommand,
+    // HelpCommand,
+    // MidAutumnFestivalCountDownCommand,
+    // DemNgayDiTuCommand,
+    // KttkCommand,
+    // YepCountDownCommand,
+    RollCommand,
+    BookCommand,
+    CookCommand
   ],
   controllers: [],
 })

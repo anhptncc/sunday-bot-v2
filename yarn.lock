@@ -5906,10 +5906,10 @@ methods@^1.1.2, methods@~1.1.2:
   resolved "https://registry.npmjs.org/methods/-/methods-1.1.2.tgz"
   integrity sha512-iclAHeNqNm68zFtnZ0e+1L2yUIdvzNoauKU4WBA3VvH/vPFieF7qfRlwUZU+DA9P9bPXIS90ulxoUoCH23sV2w==
 
-mezon-sdk@^2.8.35:
-  version "2.8.35"
-  resolved "https://registry.yarnpkg.com/mezon-sdk/-/mezon-sdk-2.8.35.tgz#f2a5243077d326ab265fb5d21b49df51dbc02919"
-  integrity sha512-N+UjUVr6IUuj/iE+/bt+uythxZKg5tyXPCv7KmyEbYTA4WjhyB8SLm1L+iJmy0FrlOAWZRmzgXwaJy+v1KLb2w==
+mezon-sdk@2.8.33:
+  version "2.8.33"
+  resolved "https://registry.yarnpkg.com/mezon-sdk/-/mezon-sdk-2.8.33.tgz#31428fd7262e8912bab413d12ec5f34b329a5f56"
+  integrity sha512-rkCI2Dk4QKaAgVOLpguEu4GJCVml1klr2csjdL6aYAZwoYADIHt7PCgP2KI+DMy6dOk0rlS2t4JMRWXje4WnnQ==
   dependencies:
     "@types/ws" "^8.5.12"
     base64-arraybuffer "^1.0.2"
@@ -8533,7 +8533,12 @@ ws@^7.4.6:
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.10.tgz#58b5c20dc281633f6c19113f39b349bd8bd558d9"
   integrity sha512-+dbF1tHwZpXcbOJdVOkzLDxZP1ailvSxM6ZweXTegylPny803bFhA+vqBYw4s31NSAk4S2Qz+AKXK9a4wkdjcQ==
 
-ws@^8.18.0, ws@^8.18.2:
+ws@^8.18.0:
+  version "8.19.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.19.0.tgz#ddc2bdfa5b9ad860204f5a72a4863a8895fd8c8b"
+  integrity sha512-blAT2mjOEIi0ZzruJfIhb3nps74PRWTCz1IjglWEEpQl5XS/UNama6u2/rjFkDDouqr4L67ry+1aGIALViWjDg==
+
+ws@^8.18.2:
   version "8.18.3"
   resolved "https://registry.npmjs.org/ws/-/ws-8.18.3.tgz"
   integrity sha512-PEIGCY5tSlUt50cqyMXfCzX+oOPqN0vuGqWzbcJ2xvnkzkq46oOpz7dQaTDBdfICb4N14+GARUDw2XV2N4tvzg==
