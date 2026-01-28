@@ -30,15 +30,19 @@ export class GifService {
 
       ctx.fillStyle = '#58a6ff';
       ctx.font = 'bold 14px monospace';
-      ctx.fillText('github-stars.sh', 16, 24);
+      ctx.fillText('mezon.sh', 16, 24);
 
       ctx.fillStyle = '#7ee787';
       ctx.font = '16px monospace';
       ctx.fillText('$ stars --count', 16, 70);
 
       ctx.font = 'bold 42px monospace';
+
+      ctx.fillStyle = '#e3b341';
+      ctx.fillText('⭐', 16, 130);
+
       ctx.fillStyle = '#f0f6fc';
-      ctx.fillText(`⭐ ${current}`, 16, 130);
+      ctx.fillText(`${current}`, 85, 130);
 
       if (i % 2 === 0) {
         ctx.fillRect(250, 95, 10, 3);

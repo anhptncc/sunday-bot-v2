@@ -32,10 +32,10 @@ export class DemMezonStarCommand extends CommandMessage {
     try {
       const messageChannel = await this.getChannelMessage(message);
       const stars = await this.getStars();
-      const gifBuffer = await this.gif.generateStarGif(stars);
 
       let url = await this.cloudinary.getExistingGifUrl(stars.toString());
       if (!url) {
+        const gifBuffer = await this.gif.generateStarGif(stars);
         url = await this.cloudinary.uploadGif(gifBuffer, stars.toString());
       }
       const newUrl = `${url}?${Date.now()}`;

@@ -9,12 +9,14 @@ cloudinary.config({
 
 @Injectable()
 export class CloudinaryService {
+  private readonly folder = 'github-stars';
+
   async uploadGif(buffer: Buffer, publicId: string): Promise<string> {
     return new Promise((resolve, reject) => {
       cloudinary.uploader
         .upload_stream(
           {
-            folder: 'github-stars',
+            folder: this.folder,
             public_id: publicId,
             resource_type: 'image',
             format: 'gif',
@@ -31,7 +33,7 @@ export class CloudinaryService {
 
   async getExistingGifUrl(
     publicId: string,
-    folder: string = 'github-stars',
+    folder: string = this.folder,
   ): Promise<string | null> {
     try {
       const result = await cloudinary.api.resource(`${folder}/${publicId}`, {
