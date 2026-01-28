@@ -30,6 +30,7 @@ import { YepCountDownCommand } from '@app/command/countdown/demngayyep.command';
 import { RollCommand } from '@app/command/roll.command';
 import { BookCommand } from '@app/command/book.command';
 import { CookCommand } from '@app/command/cook.command';
+import { AcceptCommand } from '@app/command/accept.command';
 
 @Module({
   imports: [
@@ -52,20 +53,21 @@ import { CookCommand } from '@app/command/cook.command';
     EventListenerSendToken,
 
     // Commands
-    // SalaryCountDownCommand,
-    // LunarNewYearCountDownCommand,
-    // NewYearCountDownCommand,
-    // ChristmasCountDownCommand,
-    // DecisionsCommand,
-    // AdminCommand,
-    // HelpCommand,
-    // MidAutumnFestivalCountDownCommand,
-    // DemNgayDiTuCommand,
-    // KttkCommand,
-    // YepCountDownCommand,
+    SalaryCountDownCommand,
+    LunarNewYearCountDownCommand,
+    NewYearCountDownCommand,
+    ChristmasCountDownCommand,
+    DecisionsCommand,
+    AdminCommand,
+    HelpCommand,
+    MidAutumnFestivalCountDownCommand,
+    DemNgayDiTuCommand,
+    KttkCommand,
+    YepCountDownCommand,
     RollCommand,
     BookCommand,
-    CookCommand
+    CookCommand,
+    AcceptCommand,
   ],
   controllers: [],
 })
