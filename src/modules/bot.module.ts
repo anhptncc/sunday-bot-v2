@@ -31,11 +31,16 @@ import { RollCommand } from '@app/command/roll.command';
 import { BookCommand } from '@app/command/book.command';
 import { CookCommand } from '@app/command/cook.command';
 import { AcceptCommand } from '@app/command/accept.command';
+import { DemMezonStarCommand } from '@app/command/countdown/demmezonstar.command';
+import { HttpModule } from '@nestjs/axios';
+import { CloudinaryService } from '@app/services/cloudinary.service';
+import { GifService } from '@app/services/gif.service';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
     TypeOrmModule.forFeature([Countdown, User, UserTransaction]),
+    HttpModule,
   ],
   providers: [
     BotGateway,
@@ -47,6 +52,8 @@ import { AcceptCommand } from '@app/command/accept.command';
     CountdownService,
     UserService,
     UserTransactionService,
+    GifService,
+    CloudinaryService,
 
     // Listeners
     EventListenerChannelMessage,
@@ -64,6 +71,9 @@ import { AcceptCommand } from '@app/command/accept.command';
     DemNgayDiTuCommand,
     KttkCommand,
     YepCountDownCommand,
+    DemMezonStarCommand,
+
+    // Mezure
     RollCommand,
     BookCommand,
     CookCommand,
