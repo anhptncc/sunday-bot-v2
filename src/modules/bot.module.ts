@@ -27,6 +27,10 @@ import { KttkCommand } from '@app/command/kttk.command';
 import { UserTransactionService } from '@app/service/userTransaction.service';
 import { UserTransaction } from '@app/entities/user-transaction.entity';
 import { YepCountDownCommand } from '@app/command/countdown/demngayyep.command';
+import { RollCommand } from '@app/command/roll.command';
+import { BookCommand } from '@app/command/book.command';
+import { CookCommand } from '@app/command/cook.command';
+import { AcceptCommand } from '@app/command/accept.command';
 
 @Module({
   imports: [
@@ -60,6 +64,10 @@ import { YepCountDownCommand } from '@app/command/countdown/demngayyep.command';
     DemNgayDiTuCommand,
     KttkCommand,
     YepCountDownCommand,
+    RollCommand,
+    BookCommand,
+    CookCommand,
+    AcceptCommand,
   ],
   controllers: [],
 })
