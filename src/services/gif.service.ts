@@ -38,7 +38,7 @@ export class GifService {
 
       ctx.font = 'bold 42px monospace';
       ctx.fillStyle = '#f0f6fc';
-      ctx.fillText(`⭐ ${current}`, 16, 120);
+      ctx.fillText(`⭐ ${current}`, 16, 130);
 
       if (i % 2 === 0) {
         ctx.fillRect(250, 95, 10, 3);

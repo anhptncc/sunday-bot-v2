@@ -1,4 +1,3 @@
-// cloudinary.service.ts
 import { Injectable } from '@nestjs/common';
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -30,11 +29,19 @@ export class CloudinaryService {
     });
   }
 
-  getImageUrl(publicId: string, folder: string = 'github-stars'): string {
-    return cloudinary.url(`${folder}/${publicId}`, {
-      resource_type: 'image',
-      secure: true,
-      format: 'gif',
-    });
+  async getExistingGifUrl(
+    publicId: string,
+    folder: string = 'github-stars',
+  ): Promise<string | null> {
+    try {
+      const result = await cloudinary.api.resource(`${folder}/${publicId}`, {
+        resource_type: 'image',
+      });
+
+      return result.secure_url;
+    } catch (error) {
+      console.log('🚀 ~ CloudinaryService ~ getExistingGifUrl ~ error:', error);
+      return null;
+    }
   }
 }
