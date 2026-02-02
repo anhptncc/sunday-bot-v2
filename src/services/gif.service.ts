@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { createCanvas } from 'canvas';
+import { createCanvas, loadImage } from 'canvas';
 import * as GIFEncoder from 'gif-encoder-2';
 
 @Injectable()
@@ -16,6 +16,19 @@ export class GifService {
 
     const canvas = createCanvas(width, height);
     const ctx = canvas.getContext('2d');
+
+    const imagePath =
+      'https://cdn.mezon.ai/1803263641638670336/2018196113768583168.png';
+
+    let starIcon;
+
+    try {
+      starIcon = await loadImage(imagePath);
+    } catch {
+      starIcon = await loadImage(
+        'https://repository-images.githubusercontent.com/187244080/a2c3a600-f1bf-11ea-9961-46673b0e15aa',
+      );
+    }
 
     const frames = 25;
 
@@ -36,13 +49,11 @@ export class GifService {
       ctx.font = '16px monospace';
       ctx.fillText('$ stars --count', 16, 70);
 
+      ctx.drawImage(starIcon, 20, 90, 45, 45);
+
       ctx.font = 'bold 42px monospace';
-
-      ctx.fillStyle = '#e3b341';
-      ctx.fillText('⭐', 16, 130);
-
       ctx.fillStyle = '#f0f6fc';
-      ctx.fillText(`${current}`, 85, 130);
+      ctx.fillText(`${current}`, 80, 130);
 
       if (i % 2 === 0) {
         ctx.fillRect(250, 95, 10, 3);
