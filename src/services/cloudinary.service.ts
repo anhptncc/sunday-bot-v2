@@ -11,12 +11,16 @@ cloudinary.config({
 export class CloudinaryService {
   private readonly folder = 'github-stars';
 
-  async uploadGif(buffer: Buffer, publicId: string): Promise<string> {
+  async uploadGif(
+    buffer: Buffer,
+    publicId: string,
+    folder: string = this.folder,
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       cloudinary.uploader
         .upload_stream(
           {
-            folder: this.folder,
+            folder,
             public_id: publicId,
             resource_type: 'image',
             format: 'gif',

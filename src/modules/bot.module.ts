@@ -35,6 +35,7 @@ import { DemMezonStarCommand } from '@app/command/countdown/demmezonstar.command
 import { HttpModule } from '@nestjs/axios';
 import { CloudinaryService } from '@app/services/cloudinary.service';
 import { GifService } from '@app/services/gif.service';
+import { DemMmnStarCommand } from '@app/command/countdown/demmmnstar.command';
 
 @Module({
   imports: [
@@ -72,6 +73,7 @@ import { GifService } from '@app/services/gif.service';
     KttkCommand,
     YepCountDownCommand,
     DemMezonStarCommand,
+    DemMmnStarCommand,
 
     // Mezure
     RollCommand,
