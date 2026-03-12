@@ -52,7 +52,7 @@
     "dayjs": "^1.11.13",
     "dotenv": "^16.5.0",
     "gif-encoder-2": "^1.0.5",
-    "mezon-sdk": "^2.8.39",
+    "mezon-sdk": "^2.8.43",
     "pg": "^8.16.3",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
